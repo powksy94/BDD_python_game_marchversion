@@ -12,6 +12,14 @@ def get_choices(max_options):
             return int(choice)
         print(f"Choix invalide ! Veuillez entrer un nombre entre 1 et {max_options}.")
 
+def get_valid_name():
+    while True:
+        player_name = input("Ton nom: ")
+        name = len(player_name)
+        if name > 3:
+            return name
+        print(f"Pseudo trop court ! Veuillez entrer un pseudo d'au moins 3 caractères")
+
 def display_characters(characters_list):
     for i, char in enumerate(characters_list, 1):
         print(f"{i}. {char['name']} (ATK:{char['atk']} DEF:{char['def']} PV:{char['pv']})")
