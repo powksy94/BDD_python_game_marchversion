@@ -17,7 +17,7 @@ def get_valid_name():
         player_name = input("Ton nom: ")
         name = len(player_name)
         if name > 3:
-            return name
+            return player_name
         print(f"Pseudo trop court ! Veuillez entrer un pseudo d'au moins 3 caractères")
 
 def display_characters(characters_list):

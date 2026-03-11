@@ -8,7 +8,7 @@ while True:
     display_menu()
     choice = get_choices(3)
     if choice == 1:
-        get_valid_name()
+        player_name = get_valid_name()
         team = create_team(characters.find())
         play(player_name, team)
     elif choice == 2:

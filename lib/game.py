@@ -56,18 +56,18 @@ def play(player_name, team):
 
         while current.is_alive() and enemy.is_alive():
             dmg, skill = current.attack(enemy)
+            print(f" {current.name} inflige {dmg} dégâts à {enemy.name}")
             if skill:
                 print(f" + {current.name} utilise [{skill}] !")
-            print(f" {current.name} inflige {dmg} dégâts à {enemy.name}")
             if not enemy.is_alive():
                 score += 1
                 kills[current.name] += 1
                 print(f"{enemy.name} est vaincu ! (Score = {score})")
 
             dmg, skill = enemy.attack(current)
+            print(f" {enemy.name} inflige {dmg} dégâts à {current.name}")
             if skill:
                 print(f" + {enemy.name} utilise [{skill}] !")
-            print(f" {enemy.name} inflige {dmg} dégâts à {current.name}")
             if not current.is_alive():
                 print(f"{current.name} est tombé dans les ténèbres !")
                 break
