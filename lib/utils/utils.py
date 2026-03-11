@@ -46,5 +46,3 @@ def display_available_characters(char_list, team):
     
     return available
 
-
-

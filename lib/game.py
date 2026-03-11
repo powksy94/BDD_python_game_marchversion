@@ -1,5 +1,5 @@
-import random
-from .models.entities import Character, Monster
+import random, time
+from .models.entities import Character, Monster, __init__
 from .models.db_collections import monsters, players
 from .utils.utils import display_team, get_choices, display_available_characters
 
@@ -28,8 +28,25 @@ def create_team(display_characters):
     display_team(team)
     return team
 
-def play(player_name, team):
+def time_between_rounds(tour):
+# récupérer la variable tour
+# creer la variable d'attente
+    wait = 1.5
+    print("Prochain tour ...")
+    # ajouter un temps d'attente entre chaque tour dans la boucle de combat
+    time.sleep(wait)
+    # utiliser une fonction permettant de déterminer le temps d'attente
 
+def line_break():
+# créer la variable de saut de ligne
+    line_b = range(50)
+# créer la boucle pour sauter 50 fois une ligne
+    for i in line_b:
+        print("\n")
+
+
+# logique de la boucle de combat 
+def play(player_name, team):
     score = 0
     kills = {}
     for char in team:
@@ -57,26 +74,36 @@ def play(player_name, team):
         while current.is_alive() and enemy.is_alive():
             dmg, skill = current.attack(enemy)
             print(f" {current.name} inflige {dmg} dégâts à {enemy.name}")
+            
             if skill:
                 print(f" + {current.name} utilise [{skill}] !")
             if not enemy.is_alive():
                 score += 1
                 kills[current.name] += 1
                 print(f"{enemy.name} est vaincu ! (Score = {score})")
+            time_between_rounds(score)
+            line_break()
 
             dmg, skill = enemy.attack(current)
             print(f" {enemy.name} inflige {dmg} dégâts à {current.name}")
+            
             if skill:
                 print(f" + {enemy.name} utilise [{skill}] !")
+                
             if not current.is_alive():
                 print(f"{current.name} est tombé dans les ténèbres !")
+                line_break()
                 break
+            time_between_rounds(score)
+            line_break()
 
     print(f"\n Game Over ! {player_name}, ton score: {score} monstres vaincus !")
     for name, count in kills.items():
         print(f" - {name} - {count} monstres vaincus !")
 
     players.insert_one({"name": player_name, "score": score, "kills": kills})
+    input("Appuyez sur entree")
+    line_break()
 
 def display_ranking():
     print("\n=== Classement ===")
@@ -86,3 +113,5 @@ def display_ranking():
         if "kills" in player:
             for char_name, count in player["kills"].items():
                 print(f"        - {char_name} : {count} monstres vaincus")
+    input("Appuyez sur entree")
+    line_break()
